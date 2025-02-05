@@ -5,7 +5,6 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer"; 
 import { ToastContainer } from "react-toastify";
-import { ClerkProvider } from "@clerk/nextjs";
 import "react-toastify/dist/ReactToastify.css"; 
 import { CartProvider } from "./Context/CartContext";
 
@@ -20,7 +19,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider> 
+    
     <html lang="en">
       <body className={inter.className}>
 
@@ -34,7 +33,7 @@ export default function RootLayout({
       
       </body>
     </html>
-    </ClerkProvider>
+    
   );
 }
     
