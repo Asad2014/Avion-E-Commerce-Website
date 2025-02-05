@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 import ProductListing from '../components/ProductListing';
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -49,7 +50,7 @@ export default function ProductsPage() {
   return (
     <div>
         <div>
-          <img src="/frame.png" alt="frame" />
+          <Image src="/frame.png" alt="frame" />
         </div>
 
         
