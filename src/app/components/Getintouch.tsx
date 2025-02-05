@@ -25,7 +25,7 @@ const Studio = () => {
       </div>
 
       {/* Image Div */}
-      <div className="xl:w-1/2 w-full xl:px-0">
+      <div className="xl:w-1/2 w-[90%] xl:px-0 md:mr-8 mr-0 mb-5">
         <Image
           src="/blend.png"
           alt="studio"

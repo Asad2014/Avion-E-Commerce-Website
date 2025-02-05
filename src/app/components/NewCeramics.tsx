@@ -49,8 +49,8 @@ export default function ProductsPage() {
   return (
     <div>
      
-      <h1 className=" text-4xl font-semibold mt-20 mb-8  text-center sm:text-left">New Ceramics</h1>
-
+      <h1 className=" text-4xl font-semibold mt-20 mb-8  text-center sm:text-left md:ml-12 ml-0">New Ceramics</h1>
+      <div className="max-w-[1250px] mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.slice(0, 4).map((product: Product) => (
           <div key={product.id} className="flex flex-col items-center bg-gray-100 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl">
@@ -71,8 +71,10 @@ export default function ProductsPage() {
               <h3 className="text-xl font-semibold text-gray-900 mt-2">${product.price}</h3>
             </div>
           </div>
+          
         
         ))}
+      </div>
       </div>
     </div>
   );

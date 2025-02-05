@@ -49,19 +49,23 @@ export default function ProductsPage() {
 
   return (
     <div>
-        <div>
-          <Image src="/frame.png" alt="frame" />
+        <div className="flex justify-center">
+          <Image src="/frame.png" alt="frame" 
+          width={1500}
+          height={800}/>
+          
         </div>
 
         
       {/* Product Listing Section */}
       <h1 className="text-center text-3xl font-semibold mt-20 mb-10">All Products</h1>
+      <div className="max-w-[1180px] mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
         {products.map((product: Product) => (
           <ProductListing product={product} key={product.id} />
         ))}
       </div>
-
+      </div>
       </div>
     
   );
