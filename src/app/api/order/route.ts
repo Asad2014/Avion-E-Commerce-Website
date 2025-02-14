@@ -1,3 +1,5 @@
+
+
 import { NextResponse } from "next/server";
 import { client } from "@/sanity/lib/client";
 
@@ -5,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    if (!body.name || !body.email || !body.address || !body.cart || body.cart.length === 0) {
+    if (!body.name || !body.email || !body.contactNumber || !body.address || !body.cart || body.cart.length === 0) {
       return NextResponse.json({ success: false, message: "Invalid order data" }, { status: 400 });
     }
 
@@ -13,12 +15,14 @@ export async function POST(req: Request) {
       _type: "order",
       name: body.name,
       email: body.email,
+      contactNumber: body.contactNumber,
       address: body.address,
       city: body.city,
       postalCode: body.postalCode,
       country: body.country,
       cart: body.cart,
       totalAmount: body.totalAmount,
+      paymentMethod: body.paymentMethod,
       status: "pending",
       createdAt: new Date().toISOString(),
     };

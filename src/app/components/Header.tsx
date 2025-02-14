@@ -1,5 +1,5 @@
 
-  "use client";
+"use client";
 
 import Link from "next/link";
 import { IoSearch } from "react-icons/io5";
@@ -8,12 +8,16 @@ import { CgProfile } from "react-icons/cg";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { useCart } from "../Context/CartContext";
 import { useState } from "react";
+import { useUser, UserButton, SignInButton } from "@clerk/nextjs";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const cartContext = useCart();
-  const cartQuantity = cartContext ? cartContext.cartQuantity : 0; // ✅ Ensure cartQuantity is always defined
+  const cartQuantity = cartContext ? cartContext.cartQuantity : 0;
+
+  // Clerk Authentication
+  const { isSignedIn } = useUser();
 
   return (
     <>
@@ -37,11 +41,16 @@ const Header = () => {
         </h1>
 
         <div className="flex items-center gap-3">
-          <Link href="/sign-in" className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition">
-            Sign In
-          </Link>
+          {/* Sign In Button (Only if User is NOT Signed In) */}
+          {!isSignedIn && (
+            <SignInButton>
+              <button className="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition">
+                Sign In
+              </button>
+            </SignInButton>
+          )}
 
-          {/* ✅ Cart Icon Updates in Real-time */}
+          {/* Cart Icon */}
           <Link className="relative flex justify-center items-center cursor-pointer rounded-md p-2" href="/Cart">
             <MdOutlineShoppingCart size={25} />
             {cartQuantity > 0 && (
@@ -51,7 +60,14 @@ const Header = () => {
             )}
           </Link>
 
-          <CgProfile className="text-xl cursor-pointer" size={25} />
+          {/* Profile Icon (Shows Avatar if Logged In) */}
+          {isSignedIn ? (
+            <UserButton afterSignOutUrl="/" />
+          ) : (
+            <SignInButton>
+              <CgProfile className="text-xl cursor-pointer" size={25} />
+            </SignInButton>
+          )}
 
           {/* Hamburger Menu for Mobile */}
           <button className="md:hidden text-2xl font-bold" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -76,9 +92,15 @@ const Header = () => {
       {/* Mobile Menu (Navbar + Sign In) */}
       {isMenuOpen && (
         <div className="absolute top-16 right-5 w-48 bg-white p-4 rounded-md shadow-lg md:hidden flex flex-col gap-3">
-          <Link href="/sign-in" className="block text-black px-2 py-2 rounded-md text-sm hover:bg-blue-700 transition">
-            Sign In
-          </Link>
+          {/* Show Sign In Button only if user is NOT signed in */}
+          {!isSignedIn && (
+            <SignInButton>
+              <button className="block bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition">
+                Sign In
+              </button>
+            </SignInButton>
+          )}
+
           <Link href="/Products" className="hover:text-[#5a526c]">All Products</Link>
           <Link href="/about-us" className="hover:text-[#5a526c]">About Us</Link>
           <Link href="/category/ceramic" className="hover:text-[#5a526c]">Ceramics</Link>
@@ -93,5 +115,4 @@ const Header = () => {
 };
 
 export default Header;
-
 

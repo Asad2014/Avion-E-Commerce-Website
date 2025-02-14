@@ -8,6 +8,7 @@ import Getintouch from './components/Getintouch'
 
 
 
+
 const page = () => {
   return (
     <div>
@@ -17,6 +18,7 @@ const page = () => {
       <Popularproducts />
       <Information />
       <Getintouch />
+    
       
     </div>
   )
